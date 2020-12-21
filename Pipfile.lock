@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "aede2c076acf86ab0df83ff676c08daaed99085a1c058f2abd9f4925db5522e8"
+            "sha256": "ec67231aa3bb15e1c5bec7f6b2c1aabd8fa824a1389a4258fb1e6dcc00ee5b94"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -31,6 +31,34 @@
             ],
             "index": "pypi",
             "version": "==3.1.4"
+        },
+        "django-admin-interface": {
+            "hashes": [
+                "sha256:199a7f4b9c4f06791c250f030f45da901bd54601d12b85fb9a996f486bd967ce",
+                "sha256:3769794a24ae2a3612d565a956c2a5d2286c878a7ba6299572e33494f7f1984f"
+            ],
+            "index": "pypi",
+            "version": "==0.14.1"
+        },
+        "django-colorfield": {
+            "hashes": [
+                "sha256:e435ec31712f5e8b955cc7633aef1e49cc3b409c21dfcefeb2f6ef0e1cb69533",
+                "sha256:f5dde281f4db8871eb5845aee614b4f1a47e7fd5b20476238793f519cd7bdf41"
+            ],
+            "index": "pypi",
+            "version": "==0.3.2"
+        },
+        "django-flat-responsive": {
+            "hashes": [
+                "sha256:451caa2700c541b52fb7ce2d34d3d8dee9e980cf29f5463bc8a8c6256a1a6474"
+            ],
+            "version": "==2.0"
+        },
+        "django-flat-theme": {
+            "hashes": [
+                "sha256:6b522d8c2b5a8228b30947fb002eff2868da076e9beacf3e798410e5c1a2d849"
+            ],
+            "version": "==1.1.4"
         },
         "django-js-asset": {
             "hashes": [
@@ -95,6 +123,14 @@
                 "sha256:5c55e189b682d420be27c6995ba6edce0c0a77dd67bfbe2ae6607134d5851ffd"
             ],
             "version": "==2020.4"
+        },
+        "six": {
+            "hashes": [
+                "sha256:30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
+                "sha256:8b74bedcbbbaca38ff6d7491d76f2b06b3592611af620f8426e82dddb04a5ced"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==1.15.0"
         },
         "sqlparse": {
             "hashes": [

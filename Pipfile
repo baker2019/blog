@@ -11,6 +11,8 @@ whitenoise = "==5.1.0"
 gunicorn = "==19.9.0"
 django-mptt = "==0.11.0"
 pillow = "*"
+django-admin-interface = "*"
+django-colorfield = "*"
 
 [requires]
 python_version = "3.8"
