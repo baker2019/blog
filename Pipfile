@@ -13,6 +13,7 @@ django-mptt = "==0.11.0"
 pillow = "*"
 django-admin-interface = "*"
 django-colorfield = "*"
+psycopg2-binary = "==2.8.5"
 
 [requires]
 python_version = "3.8"
