@@ -21,10 +21,14 @@ from django.urls import path, include# new
 urlpatterns = [
     path('', include('home.urls')),
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('category/<int:id>/<slug:slug>/', views.category_houses, name='category'),
+    path('house/<int:id>/<slug:slug>/', views.house_detail, name='house_detail'),
     path('house/', include('house.urls')),
     path('home/', include('home.urls')),
+    path('logout/', views.logout_view, name='logout_view'),
+    path('login/', views.login_view, name='login_view'),
+    path('signup/', views.signup_view, name='signup_view'),
+    path('sss/', views.faq, name='faq'),
     path('blog/', include('blog.urls')), # new
 ]
 
