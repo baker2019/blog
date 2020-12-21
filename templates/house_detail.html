@@ -1,0 +1,225 @@
+{% extends "homebase.html" %}
+{% block title %} {{ house.title }} {% endblock %}
+{% block keywords %} {{ house.keywords }} {% endblock %}
+{% block description %} {{ house.description }} {% endblock %}
+{% block head %}
+{% load static %}
+    <link rel="shortcut icon" type="text/x-icon" href="{{ setting.icon.url }}" >
+    <link rel="stylesheet" href="{% static 'gallery/css/core-style.css' %}">
+    <link rel="stylesheet" href="{% static 'gallery/style.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <!-- full Title -->
+    <div class="full-title">
+        <div class="container">
+            <!-- Page Heading/Breadcrumbs -->
+            <h1 class="mt-4 mb-3"> {{house.title}} </h1>
+            <div class="breadcrumb-main">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Property Details</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <div class="blog-main">
+        <div class="container">
+            <div class="row">
+                <!-- Post Content Column -->
+                <div class="col-lg-8">
+                    <!-- Preview Image -->
+                    <div class="single_product_thumb">
+                        <div id="product_details_slider" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li class="active" data-target="#product_details_slider" data-slide-to="0" style="background-image: url({{house.image.url}});">
+                                </li>
+                                {% for rs in images %}
+                                    <li data-target="#product_details_slider" data-slide-to="{{ rs.id }}" style="background-image: url({{rs.image.url}});">
+                                    </li>
+                                {% endfor %}
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <a class="gallery_img" href="#product_details_slider">
+                                        <img class="d-block w-100 img-fluid" src="{{ house.image.url }}"  alt="slide">
+                                    </a>
+                                </div>
+                                {% for rs in images %}
+                                    <div class="carousel-item">
+                                        <a class="gallery_img" href="#product_details_slider">
+                                            <img class="d-block w-100" src="{{ rs.image.url }}"  alt="slide">
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <section class="amenities">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h3 class="my-3">Amenities:</h3>
+                                    <h5 class="my-3 text-primary">Basic</h5>
+                                    <p>{{house.basic_amenities}}</p>
+                                    <h5 class="my-3 text-primary">Facilities</h5>
+                                    <p>{{house.facilities_amenities}}</p>
+                                    <h5 class="my-3 text-primary">Dining</h5>
+                                    <p>{{house.dining_amenities}}</p>
+                                    <h5 class="my-3 text-primary">Guest access</h5>
+                                    <p>{{house.guest_access_amenities}}</p>
+                                    <h5 class="my-3 text-primary">Bed and Bath</h5>
+                                    <p>{{house.bed_and_bath_amenities}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <div class="blog-right-side">
+                        <!-- Comments Form -->
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}" role="alert">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="card my-4">
+                            <h5 class="card-header">Your Comment:</h5>
+                            <div class="card-body">
+                                <form action="/house/addcomment/{{ house.id }}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="subject" id="id_subject" placeholder="" />
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="comment" id="id_comment" rows="3" placeholder="comment"></textarea>
+                                    </div>
+
+                                    {% if user.id is not None %}
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    {% else %}
+                                        Log in to add a comment!
+                                    {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for rs in comments %}
+                    <!-- Single Comment -->
+                    <div class="media mb-4">
+                        <div class="media-body">
+                            <div class="elfsight-app-05b33793-8c88-4b62-9e5a-1d2534ac34d7"></div> 
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Sidebar Widgets Column -->
+                <div class="col-md-4 blog-right-side">
+                    <h3 class="my-3">Details </h3>
+                    <ul>
+                        <li><span>category:</span><span>{{ house.category }}</span></li>
+                        <li><span><i class="fa fa-home"></i> Bedrooms: </span><span>{{ house.number_of_bedrooms }}</span></li>
+                        <li><span><i class="fa fa-bed"></i> Beds: </span><span>{{house.number_of_beds}}</span></li>
+                        <li><span><i class="fa fa-user"></i> max guests: </span><span>{{ house.number_guest }}</span></li>
+                        <li><span><i class="fa fa-tag"></i> Weekday Price: </span><span>${{ house.price1 }} /night</span></li>
+                        <li><span><i class="fa fa-tag"></i> Weekend Price: </span><span>${{ house.price2 }} /night</span></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                    <h3 class="my-3">Description:</h3>
+                    <p>{{ house.detail }}</p>
+                    <hr>
+                    <div class="smart-wrap">
+                        <div class="smart-forms smart-container wrap-2">
+                        
+                            <div class="form-header header-blue">
+                                <h4><i class="fa fa-calendar"></i> Booking </h4>
+                            </div><!-- end .form-header section -->
+                            
+                            <form method="post" action="" id="smart-form">
+                                {% csrf_token %}
+                                <div class="form-body theme-blue">
+                                
+                                    <div class="section">
+                                        <label for="guestname" class="field-label">Your Names</label>
+                                        <label for="guestname" class="field prepend-icon">
+                                            <input type="text" name="guestname" id="guestname" class="gui-input" placeholder="Your name...">
+                                            <span class="field-icon"><i class="fa fa-user"></i></span>  
+                                        </label>
+                                    </div><!-- end section --> 
+                                                                
+                                    <div class="frm-row">
+                                        <div class="section colm colm6">
+                                            <label for="guestemail" class="field-label">Email Address</label>
+                                            <label for="guestemail" class="field prepend-icon">
+                                                <input type="email" name="guestemail" id="guestemail" class="gui-input" placeholder="Email address">
+                                                <span class="field-icon"><i class="fa fa-envelope"></i></span>  
+                                            </label>
+                                        </div><!-- end section -->
+                                        
+                                        <div class="section colm colm6">
+                                            <label for="guestelephone" class="field-label">Telephone / Mobile</label>
+                                            <label for="guestelephone" class="field prepend-icon">
+                                                <input type="text" name="guestelephone" id="guestelephone" class="gui-input" placeholder="Telephone / moble number">
+                                                <span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+                                            </label>
+                                        </div><!-- end section -->
+                                    </div><!-- end .frm-row section --> 
+                                    
+                                    <div class="frm-row">
+                                        <div class="section colm colm6">
+                                            <label for="adults" class="field-label">Adult Guests</label>
+                                            <label for="adults" class="field prepend-icon">
+                                                <input type="text" id="adults" name="adults" class="gui-input" placeholder="Number of adults">
+                                                <span class="field-icon"><i class="fa fa-male"></i></span>  
+                                            </label>
+                                        </div><!-- end section -->
+                                        
+                                        <div class="section colm colm6">
+                                            <label for="children" class="field-label">Child Guests</label>
+                                            <label for="children" class="field prepend-icon">
+                                                <input type="text" id="children" name="children" class="gui-input" placeholder="Number of children">
+                                                <span class="field-icon"><i class="fa fa-female"></i></span>  
+                                            </label>
+                                        </div><!-- end section -->
+                                    </div><!-- end .frm-row section -->                                   
+                                
+                                    <div class="frm-row">
+                                        <div class="section colm colm6">
+                                            <label for="checkin" class="field-label">Check-in Date</label>
+                                            <label for="checkin" class="field prepend-icon">
+                                                <input type="text" id="checkin" name="checkin" class="gui-input" placeholder="mm/dd/yyyy">
+                                                <span class="field-icon"><i class="fa fa-calendar"></i></span>  
+                                            </label>
+                                        </div><!-- end section -->
+                                        
+                                        <div class="section colm colm6">
+                                            <label for="checkout" class="field-label">Check-out Date</label>
+                                            <label for="checkout" class="field prepend-icon">
+                                                <input type="text" id="checkout" name="checkout" class="gui-input" placeholder="mm/dd/yyyy">
+                                                <span class="field-icon"><i class="fa fa-calendar"></i></span>  
+                                            </label>
+                                        </div><!-- end section -->
+                                    </div><!-- end .frm-row section -->                    
+                                    
+                                </div><!-- end .form-body section -->
+                                <div class="form-footer">
+                                    <button type="submit" class="button btn-blue"> Submit Booking </button>
+                                    <button type="reset" class="button"> Cancel </button>
+                                </div><!-- end .form-footer section -->
+                            </form>
+                            
+                        </div><!-- end .smart-forms section -->
+                    </div><!-- end .smart-wrap section -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+<div class="clearfix"></div>

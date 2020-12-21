@@ -39,9 +39,15 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     
+    'home',
+    'house',
     'blog', 
     'accounts',
+    'mptt',
 ]
+
+SITE_ID = 1
+X_FRAME_OPTIONS = 'SAME_ORIGIN'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -124,10 +130,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_URL = '/static/'
 STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
 
-STATIC_ROOT = STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles')) # new
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles')) # new
 STATICFILES_STORAGE ='whitenoise.storage.CompressedManifestStaticFilesStorage' 
 
 LOGIN_REDIRECT_URL = 'home'

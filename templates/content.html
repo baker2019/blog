@@ -1,0 +1,40 @@
+{% load static %}
+    <!-- Page Content -->
+	<div class="services-bar">
+		<div class="container">
+			<h1 class="py-4">Properties </h1>
+			<div class="row">
+                  {% for rs in random_houses %}
+                       <div class="col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-img">
+                                    <a href="/house/{{ rs.id }}/{{ rs.slug }}">
+                                       <img class="img-fluid" src="{{ rs.image.url }}" alt="" />
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-header"> {{ rs.title }} </h4>
+
+                                    <p class="card-text">{{rs.description}}</p>
+                                    <p class="card-text">{{rs.number_of_bedrooms}}</p>
+
+                                    
+                                </div>
+                            </div>
+                       </div>
+                  {% endfor %}
+			</div>
+		</div>
+	</div>
+    
+
+	<div class="container">
+        <div class="portfolio-main">
+            <h2>Local attractions</h2>
+                
+        </div>
+    </div>
+    
+
+
+
